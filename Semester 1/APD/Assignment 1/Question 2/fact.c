@@ -1,15 +1,12 @@
 #include <stdio.h>
  
-int main()
-{
-  int c, n, f = 1;
- 
-  printf("Enter a number to calculate its factorial\n");
-  scanf("%d", &n);
-  for (c = 1; c <= n; c++)
-    f = f * c;
- 
-  printf("Factorial of %d = %d\n", n, f);
- 
-  return 0;
+int main() {
+  int number, iterator;
+  long int fatorial = 1;
+  printf("Enter your number: ");
+  scanf("%d", &number);
+  for (iterator = 1; iterator <= number; iterator++) {
+    fatorial = iterator * fatorial;
+  }
+  printf("Factorial is: %ld \n", fatorial);
 }
