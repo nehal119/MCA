@@ -18,7 +18,7 @@ long int factCalcItr(int number) {
 }
 
 int main() {
-  int number, iterator;
+  int number;
   printf("Enter your number: ");
   scanf("%d", &number);
   printf("Factorial using loop is: %ld \n", factCalcItr(number));
