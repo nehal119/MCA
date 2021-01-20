@@ -1,0 +1,92 @@
+/* Create Table EMP  */
+CREATE TABLE EMP (
+    ENAME VARCHAR2(20),
+    DEPT_NAME VARCHAR2(20),
+    DESIGNATION VARCHAR2(20),
+    SALARY NUMBER(8),
+    DATE_OF_JOIN DATE DEFAULT SYSDATE
+);
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('KARAN', 'ACCOUNTING', 'DIRECTOR', 50000, TO_DATE('2012/11/17', 'yyyy/mm/dd'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('FARAH', 'RESEARCH', 'ANALYST', 30000, TO_DATE('Dec 03, 1991', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('SCINDIA', 'RESEARCH', 'ANALYST', 30000, TO_DATE('Dec 09, 2002', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('JOY', 'RESEARCH', 'MANAGER', 29750, TO_DATE('Apr 02, 2011', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('BHASKAR', 'SALES', 'MANAGER', 28500, TO_DATE('May 01, 1999', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('CHANDER', 'ACCOUNTING', 'MANAGER', 24500, TO_DATE('Jun 09, 2000', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('ANIL', 'SALES', 'SALESMAN ', 16000, TO_DATE('Feb 20, 1991', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('TOMAR', 'SALES', 'SALESMAN', 15000, TO_DATE('Sep 08, 2001', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('MILIND', 'ACCOUNTING', 'CLERK', 13000, TO_DATE('Jan 23, 2002', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('SAXENA', 'SALES', 'SALESMAN', 12500, TO_DATE('Sep 28, 1999', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('TOMAR', 'SALES', 'SALESMAN', 14500, TO_DATE('Feb 22, 1997', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('ANAND', 'RESEARCH', 'CLERK', 11000, TO_DATE('Jan 12, 1993', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('GEORGE', 'SALES', 'CLERK', 9500, TO_DATE('Dec 03, 1990', 'mm dd, yyyy'));
+
+INSERT INTO EMP(ENAME, DEPT_NAME, DESIGNATION, SALARY, DATE_OF_JOIN)
+VALUES('SURESH', 'RESEARCH', 'CLERK', 8000, TO_DATE('Dec 17, 1992', 'mm dd, yyyy'));
+
+SELECT * FROM EMP;
+
+/* (a) Find all the ENAME’s whose salary is < Rs.20000   */
+SELECT ENAME FROM EMP WHERE SALARY < 20000;
+
+/* (b) Find all the employees working with SALES Department and with designation MANAGER.  */
+SELECT ENAME FROM EMP WHERE DEPT_NAME = 'SALES' AND DESIGNATION = 'MANAGER';
+
+/* (c) Find all employees whose name starts with S  */
+SELECT ENAME FROM EMP WHERE ENAME LIKE 'S%';
+
+/* (d) Find total number of employees who work with RESEARCH department  */
+SELECT COUNT(ENAME) "No. of employees working with RESEARCH department" from EMP WHERE DEPT_NAME = 'RESEARCH';
+
+/* (e) Find all the employees who joined after Jan 1, 2010.  */
+SELECT ENAME FROM EMP WHERE DATE_OF_JOIN > TO_DATE('Jan 1, 2010', 'mm dd, yyyy');
+SELECT ENAME FROM EMP WHERE DATE_OF_JOIN > '01jan2010';
+
+/* (f)Count number of employees whose salary is between Rs.8000 and Rs.12500.  */
+SELECT COUNT(ENAME) "No. of employees with salary between Rs.8000 and Rs.12500" from EMP WHERE SALARY BETWEEN 8000 AND 12500;
+
+/* (g)Sort the supplier table by ENAME.  */
+SELECT * FROM EMP ORDER BY ENAME ASC;
+
+/* (h)Find the employees whose designation is SALESMAN and joined after 1st Aug, 1990.  */
+SELECT ENAME FROM EMP WHERE DESIGNATION = 'SALESMAN' AND DATE_OF_JOIN > '01aug1990';
+
+/* (i)Find all the employees whose designation is CLERK.  */
+SELECT ENAME FROM EMP WHERE DESIGNATION = 'CLERK';
+
+/* (j)Count number of SALESMAN in SALES department.  */
+SELECT COUNT(ENAME) "No. of SALESMAN in SALES department" from EMP WHERE DEPT_NAME = 'SALES' AND DESIGNATION = 'SALESMAN';
+
+/* (k)Count all the number of employees who are working with the company.  */
+SELECT COUNT(ENAME) "No. of employees who are working with the company" from EMP;
+
+/* (l)Find the employees joined between 1st Jan, 1997 and 31st Dec, 2010.  */
+SELECT ENAME FROM EMP WHERE DATE_OF_JOIN > '01jan1997' AND DATE_OF_JOIN < '31dec2010';
+
+/* (m)Sort the table by the SALARY, descending order.  */
+SELECT * FROM EMP ORDER BY SALARY DESC;

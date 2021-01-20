@@ -15,7 +15,8 @@ CREATE TABLE Employee (
     empno NUMBER(5) NOT NULL PRIMARY KEY,
     ename VARCHAR2(30) NOT NULL,
     job VARCHAR2(10),
-    hiredate timestamp DEFAULT systimestamp,
+    hiredate DATE DEFAULT SYSDATE,
+    /* hiredate timestamp DEFAULT systimestamp,  */
     deptno NUMBER,
     FOREIGN KEY(deptno) REFERENCES Department(deptno)
 );
