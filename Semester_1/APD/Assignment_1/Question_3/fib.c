@@ -5,7 +5,7 @@ int recCounter = 0;
 int fibRec(int number) {
   recCounter += 1;
   if (number <= 1)
-      return number;
+    return number;
   return fibRec(number - 1) + fibRec(number - 2); 
 }
 
