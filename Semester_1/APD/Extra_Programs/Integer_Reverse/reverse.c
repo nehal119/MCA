@@ -20,7 +20,6 @@ void reverseFunc () {
 
 int main() {
   int toContinue;
-  int number;
   reverseFunc();
   printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
   scanf("%d", &toContinue);

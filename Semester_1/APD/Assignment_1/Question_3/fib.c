@@ -22,7 +22,7 @@ int fibItr(int number) {
   return b;
 }
 
-int main() { 
+void looperFunc () {
     int number;
     clock_t t;
     printf("Enter your number: ");
@@ -40,4 +40,16 @@ int main() {
     time_taken = ((double)t)/CLOCKS_PER_SEC;
     printf("Recursion took %f seconds to complete \n", time_taken);
     printf("Number of function call is: %d \n", recCounter);
-} 
+}
+
+int main() {
+  int toContinue;
+  looperFunc();
+  printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+  scanf("%d", &toContinue);
+  while (toContinue == 1) {
+    looperFunc();
+    printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+    scanf("%d", &toContinue);
+  }
+}

@@ -17,10 +17,22 @@ long int factCalcItr(int number) {
   return fatorial;
 }
 
-int main() {
+void looperFunc () {
   int number;
   printf("Enter your number: ");
   scanf("%d", &number);
   printf("Factorial using loop is: %ld \n", factCalcItr(number));
   printf("Factorial using recursion is: %ld \n", factCalcRec(number));
+}
+
+int main() {
+  int toContinue;
+  looperFunc();
+  printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+  scanf("%d", &toContinue);
+  while (toContinue == 1) {
+    looperFunc();
+    printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+    scanf("%d", &toContinue);
+  }
 }
