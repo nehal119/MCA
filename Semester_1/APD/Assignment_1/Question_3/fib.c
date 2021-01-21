@@ -31,13 +31,13 @@ int main() {
     t = clock();
     printf("\nFibonacci number using loop is: %d \n", fibItr(number)); 
     t = clock() - t; 
-    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds 
+    double time_taken = ((double)t)/CLOCKS_PER_SEC;
     printf("Loop took %f seconds to complete \n", time_taken);
 
     t = clock();
     printf("\nFibonacci number using recursion is: %d \n", fibRec(number));
     t = clock() - t; 
-    time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds 
+    time_taken = ((double)t)/CLOCKS_PER_SEC;
     printf("Recursion took %f seconds to complete \n", time_taken);
     printf("Number of function call is: %d \n", recCounter);
 } 
