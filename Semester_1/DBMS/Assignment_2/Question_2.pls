@@ -145,8 +145,16 @@ FROM PROGRAMMER ORDER BY DOJ DESC;
 
 -- 25.Who are the programmers who celebrate their birthdays during the current month?
 
-26.How many female programmers are there?
-27.What are the languages known by the male programmers?
+-- 26.How many female programmers are there?
+SELECT COUNT(PNAME) FROM PROGRAMMER WHERE SEX = 'F'; 
+
+-- 27.What are the languages known by the male programmers?  
+-- SELECT PROF1, PROF2 FROM PROGRAMMER;
+-- select PROF1 || ' ' || PROF2 from PROGRAMMER;
+SELECT PROF1 AS languages FROM PROGRAMMER
+UNION
+SELECT PROF2 AS languages FROM PROGRAMMER;
+
 28.What is the average salary?
 29.How many people draw 5000 to 7500?
 30.Display the details of those who don’t know C, C++ or Pascal.
