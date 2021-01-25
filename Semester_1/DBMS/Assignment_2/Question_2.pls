@@ -155,8 +155,15 @@ SELECT PROF1 AS languages FROM PROGRAMMER
 UNION
 SELECT PROF2 AS languages FROM PROGRAMMER;
 
-28.What is the average salary?
-29.How many people draw 5000 to 7500?
-30.Display the details of those who don’t know C, C++ or Pascal.
-31.Display the costliest package developed by each programmer.
+-- 28.What is the average salary?
+SELECT AVG(SAL) FROM PROGRAMMER;
+
+-- 29.How many people draw 5000 to 7500?
+SELECT COUNT(PNAME) FROM PROGRAMMER WHERE SAL BETWEEN 5000 AND 7500;
+
+-- 30.Display the details of those who don’t know C, C++ or Pascal.
+SELECT * FROM PROGRAMMER WHERE PROF1 NOT IN ('C', 'C++', 'Pascal') OR PROF2 NOT IN ('C', 'C++', 'Pascal');
+
+-- 31.Display the costliest package developed by each programmer.
+
 32.Produce the following output for all the male programmersProgrammer
