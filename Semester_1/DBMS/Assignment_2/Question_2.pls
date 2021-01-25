@@ -28,15 +28,15 @@ CREATE TABLE SOFTWARE (
     SOLD NUMBER(8)
 );
 INSERT INTO SOFTWARE(PNAME, TITLE, DEVIN, SCOST, DCOST, SOLD)
-VALUES('Vivek', 'Google Map', 'JAVA', 10000, 8000, 100);
+VALUES('Vivek', 'Google Map', 'JAVA', 1500, 10000, 100);
 INSERT INTO SOFTWARE(PNAME, TITLE, DEVIN, SCOST, DCOST, SOLD)
-VALUES('Jatin', 'Health Tracker', 'Oracle', 8000, 9000, 30);
+VALUES('Jatin', 'Health Tracker', 'Oracle', 800, 50000, 30);
 INSERT INTO SOFTWARE(PNAME, TITLE, DEVIN, SCOST, DCOST, SOLD)
-VALUES('Rakesh', 'Online Portal', 'C', 20000, 18000, 5000);
+VALUES('Rakesh', 'Online Portal', 'C', 2000, 20000, 5000);
 INSERT INTO SOFTWARE(PNAME, TITLE, DEVIN, SCOST, DCOST, SOLD)
-VALUES('Rakesh', 'Online Portfolio', 'SQL', 30000, 28000, 1500);
+VALUES('Rakesh', 'Online Portfolio', 'SQL', 1000, 25000, 1500);
 INSERT INTO SOFTWARE(PNAME, TITLE, DEVIN, SCOST, DCOST, SOLD)
-VALUES('Saurabh', 'Student Record', 'Oracle', 40000, 38000, 221);
+VALUES('Saurabh', 'Student Record', 'Oracle', 4000, 40000, 221);
 SELECT * FROM SOFTWARE;
 
 /* Create Table PROGRAMMER  */
@@ -89,24 +89,62 @@ SELECT COUNT(COURSE) "Programmers that have done the BCA course" FROM STUDIES WH
 -- 8.How much revenue has been earned through the sale of packages developed in C.
 SELECT SUM(SOLD) 'Revenue from C packages' FROM SOFTWARE WHERE DEVIN = 'C';
 
-9.Display the details of software developed by Rakesh.
+-- 9.Display the details of software developed by Rakesh.
+SELECT * FROM SOFTWARE WHERE PNAME = 'Rakesh';
 
-10.How many programmers studied at Pentafour.
-11.Display the details of packages whose sales crossed the 5000 mark.
-12.Find out the number of copies which should be sold in order to recover the development cost of each package.
-13.Display the details of packages for which the development cost has been recovered.
-14.What is the price of costliest software developed in VB?
-15.How many packages were developed in Oracle ?
-16.How many programmers studied at PRAGATHI?
-17.How many programmers paid 10000 to 15000 for the course?
-18.What is the average course fee?
-19.Display the details of programmers knowing C.
-20.How many programmers know either C or Pascal?
-21.How many programmers don’t know C and C++?
-22.How old is the oldest male programmer?
-23.What is the average age of female programmers?
-24.Calculate the experience in years for each programmer and display along with their names in descending order.
-25.Who are the programmers who celebrate their birthdays during the current month?
+-- 10.How many programmers studied at Department of CS.
+SELECT COUNT(PNAME) FROM STUDIES WHERE SPLACE = 'Department of CS';
+
+-- 11.Display the details of packages whose sales crossed the 5000 mark.
+SELECT * FROM SOFTWARE WHERE SOLD > 5000 ;
+
+-- 12.Find out the number of copies which should be sold in order to recover the development cost of each package.
+SELECT TITLE, ROUND(DCOST/SCOST) "copies needs to be sold to retrive development cost" FROM SOFTWARE;
+
+-- 13.Display the details of packages for which the development cost has been recovered.
+SELECT * FROM SOFTWARE WHERE SCOST * SOLD > DCOST;
+
+-- 14.What is the price of costliest software developed in Oracle?
+SELECT MAX(DCOST) "Costliest software developed in Oracle" FROM SOFTWARE WHERE DEVIN = 'Oracle';
+
+-- 15.How many packages were developed in Oracle ?
+SELECT COUNT(PNAME) "Packages were developed in Oracle" FROM SOFTWARE WHERE DEVIN = 'Oracle';
+
+-- 16.How many programmers studied at Delhi Univ?
+SELECT COUNT(PNAME) FROM PROGRAMMER WHERE PNAME IN (SELECT PNAME FROM STUDIES WHERE SPLACE = 'Department of CS');
+
+-- 17.How many programmers paid 10000 to 15000 for the course?
+SELECT COUNT(PNAME) FROM PROGRAMMER WHERE PNAME IN (SELECT PNAME FROM STUDIES WHERE CCOST BETWEEN 10000 AND 15000);
+
+-- 18.What is the average course fee?
+SELECT AVG(CCOST) "average course fee" FROM STUDIES;
+
+-- 19.Display the details of programmers knowing C.
+SELECT * FROM PROGRAMMER WHERE PROF1 = 'C' OR PROF2 = 'C';
+
+-- 20.How many programmers know either C or Pascal?
+SELECT COUNT(PNAME) FROM PROGRAMMER WHERE PROF1 = 'C' OR PROF2 = 'C' OR PROF1 = 'Pascal' OR PROF2 = 'Pascal';
+
+-- 21.How many programmers don’t know C and C++?
+SELECT COUNT(PNAME) FROM PROGRAMMER WHERE PROF1 NOT IN ('C', 'C++') OR PROF2 NOT IN ('C', 'C++');
+
+-- 22.How old is the oldest male programmer?
+SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE(DOB)) / 365.25) "AGE"
+FROM PROGRAMMER
+WHERE DOB = (SELECT MIN(DOB) FROM PROGRAMMER)
+AND SEX = 'M';
+
+-- 23.What is the average age of female programmers?
+SELECT AVG(TRUNC(TO_NUMBER(SYSDATE - TO_DATE(DOB)) / 365.25)) FROM PROGRAMMER WHERE SEX = 'F';
+
+-- 24.Calculate the experience in years for each programmer and display along with their names in descending order.
+SELECT
+  PNAME,
+  TRUNC(TO_NUMBER(SYSDATE - TO_DATE(DOJ)) / 365.25) AS EXPERIENCE
+FROM PROGRAMMER ORDER BY DOJ DESC;
+
+-- 25.Who are the programmers who celebrate their birthdays during the current month?
+
 26.How many female programmers are there?
 27.What are the languages known by the male programmers?
 28.What is the average salary?

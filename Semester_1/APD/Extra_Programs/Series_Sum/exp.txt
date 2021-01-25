@@ -1,0 +1,11 @@
+1. Declare four variables x, n, i=0, and Sum=0.
+
+2. Take input for variable x for f(x) in variable x.
+
+3. Take input for variable n to compute the f(x) upto.
+
+4. Loop n times with iteration counter i.
+
+5. On each iteration compute (x)^i and add to Sum.
+
+6. Upon loop exit print Sum.
