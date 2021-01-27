@@ -31,9 +31,9 @@ VALUES(1001, 'Amar', 'Manager', 1005, '25jun2015', 90000, 90000, 4);
 INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
 VALUES(1002, 'Aman', 'Research Sr', 1001, '09mar2013', 40000, 40000, 1);
 INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES(1003, 'Saurabh', 'Researcher', 1003, '09mar2016', 30000, 30000, 1);
+VALUES(1003, 'Saurabh', 'Researcher', 1002, '09mar2016', 30000, 30000, 1);
 INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES(1004, 'Vikas', 'Researcher', 1003, '09jul2016', 35000, 35000, 1);
+VALUES(1004, 'Vikas', 'Researcher', 1002, '09jul2016', 35000, 35000, 1);
 
 INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
 VALUES(1005, 'Jatin', 'Market Sr', 1001, '25dec2019', 25000, 25000, 2);
@@ -56,8 +56,12 @@ VALUES(1012, 'Suraj', 'Developer', 1009, '15jan2016', 40000, 40000, 5);
 
 SELECT * FROM EMP;
 
-1.List all the employees who have at least one person reporting to them.
-2.List the employee details if and only if more than 10 employees are present in department no 10.
+-- 1.List all the employees who have at least one person reporting to them.
+SELECT * FROM EMP WHERE EMPNO IN (SELECT MGR FROM EMP);
+
+-- 2.List the employee details if and only if more than 3 employees are present in department no 5.
+SELECT * FROM EMP WHERE EMP 
+
 3.List the name of the employees with their immediate higher authority.
 4.List all the employees who do not manage any one.
 5.List the employee details whose salary is greater than the lowest salary of an employee belonging to deptno 20.
