@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void sqRoot () {
+void looperFunc () {
   int number;
   printf("Enter your number: ");
   scanf("%d", &number);
@@ -9,13 +9,10 @@ void sqRoot () {
 }
 
 int main() {
-  int toContinue;
-  sqRoot();
-  printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
-  scanf("%d", &toContinue);
+  int toContinue = 1;
   while (toContinue == 1) {
-    sqRoot();
-    printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+    looperFunc();
+    printf("\n\nDo you want to continue? (1 to continue || 0 to exit)");
     scanf("%d", &toContinue);
   }
 }

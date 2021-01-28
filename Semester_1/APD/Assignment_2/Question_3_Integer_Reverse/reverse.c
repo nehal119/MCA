@@ -19,13 +19,10 @@ void reverseFunc () {
 }
 
 int main() {
-  int toContinue;
-  reverseFunc();
-  printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
-  scanf("%d", &toContinue);
+  int toContinue = 1;
   while (toContinue == 1) {
-    reverseFunc();
-    printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+    looperFunc();
+    printf("\n\nDo you want to continue? (1 to continue || 0 to exit)");
     scanf("%d", &toContinue);
   }
 }

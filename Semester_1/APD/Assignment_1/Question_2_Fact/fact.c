@@ -25,13 +25,10 @@ void looperFunc () {
 }
 
 int main() {
-  int toContinue;
-  looperFunc();
-  printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
-  scanf("%d", &toContinue);
+  int toContinue = 1;
   while (toContinue == 1) {
     looperFunc();
-    printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+    printf("\n\nDo you want to continue? (1 to continue || 0 to exit)");
     scanf("%d", &toContinue);
   }
 }

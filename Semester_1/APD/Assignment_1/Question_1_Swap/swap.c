@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void swapFunc () {
+void looperFunc () {
   int firstNum, secondNum = 0;
   printf("Enter first number: ");
   scanf("%d", &firstNum);
@@ -14,13 +14,10 @@ void swapFunc () {
   printf("Second number is: %d \n", secondNum);
 }
 int main() {
-  int toContinue;
-  swapFunc();
-  printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
-  scanf("%d", &toContinue);
+  int toContinue = 1;
   while (toContinue == 1) {
-    swapFunc();
-    printf("\nDo you want to continue? (1 to continue / 0 to stop) ");
+    looperFunc();
+    printf("\n\nDo you want to continue? (1 to continue || 0 to exit)");
     scanf("%d", &toContinue);
   }
 }
