@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <time.h>
 
+// -lm
+
 int recCounter = 0;
 
 int fibRec(int number) {
@@ -25,17 +27,17 @@ int fibItr(int number) {
 void looperFunc () {
     int number;
     clock_t t;
-    printf("Enter your number: ");
+    printf("Enter position of the Fibonacci Series: ");
     scanf("%d", &number);
 
     t = clock();
-    printf("\nFibonacci number using loop is: %d \n", fibItr(number)); 
+    printf("\nFibonacci number using loop is: %d \n", fibItr(number-1)); 
     t = clock() - t; 
     double time_taken = ((double)t)/CLOCKS_PER_SEC;
     printf("Loop took %f seconds to complete \n", time_taken);
 
     t = clock();
-    printf("\nFibonacci number using recursion is: %d \n", fibRec(number));
+    printf("\nFibonacci number using recursion is: %d \n", fibRec(number-1));
     t = clock() - t; 
     time_taken = ((double)t)/CLOCKS_PER_SEC;
     printf("Recursion took %f seconds to complete \n", time_taken);

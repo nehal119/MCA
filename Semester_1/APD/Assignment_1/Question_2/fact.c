@@ -1,11 +1,10 @@
 #include <stdio.h>
  
 long int factCalcRec(int number) {
-  if (number >= 1) {
-    return number*factCalcRec(number - 1);
-  } else {
+  if (number < 1) {
     return 1;
   }
+  return number*factCalcRec(number - 1);
 }
 
 long int factCalcItr(int number) {
