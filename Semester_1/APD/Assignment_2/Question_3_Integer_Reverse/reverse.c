@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void reverseFunc () {
+void looperFunc () {
   int number, checkPalindrome, reverse = 0;
   printf("Enter an integer: ");
   scanf("%d", &number);
