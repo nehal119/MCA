@@ -60,12 +60,20 @@ SELECT * FROM EMP;
 SELECT * FROM EMP WHERE EMPNO IN (SELECT MGR FROM EMP);
 
 -- 2.List the employee details if and only if more than 3 employees are present in department no 5.
-SELECT * FROM EMP WHERE EMP 
+SELECT * FROM EMP
+WHERE DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(EMPNO)>3 AND DEPTNO=5);
 
-3.List the name of the employees with their immediate higher authority.
-4.List all the employees who do not manage any one.
-5.List the employee details whose salary is greater than the lowest salary of an employee belonging to deptno 20.
-6.List the details of the employee earning more than the highest paid manager.
+-- 3.List the name of the employees with their immediate higher authority.
+SELECT A.ENAME "EMPLOYEE", B.ENAME "REPORTS TO" FROM EMP A, EMP B WHERE A.MGR = B.EMPNO;
+
+-- 4.List all the employees who do not manage any one.
+SELECT A.ENAME "NOT MANAGING ANYONE" FROM EMP A WHERE A.EMPNO NOT IN (SELECT MGR FROM EMP);
+
+-- 5.List the employee details whose salary is greater than the lowest salary of an employee belonging to deptno 5.
+SELECT * FROM EMP
+WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE DEPTNO=5);
+
+-- 6.List the details of the employee earning more than the highest paid manager.
 7.List the highest salary paid for each job.
 8.Find the most recently hired employee in each department.
 9.In which year did most people join the company? Display the year and the number of employees.
