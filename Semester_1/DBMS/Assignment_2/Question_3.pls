@@ -74,12 +74,44 @@ SELECT * FROM EMP
 WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE DEPTNO=5);
 
 -- 6.List the details of the employee earning more than the highest paid manager.
-7.List the highest salary paid for each job.
-8.Find the most recently hired employee in each department.
-9.In which year did most people join the company? Display the year and the number of employees.
-10.Which department has the highest annual remuneration bill?
-11.Write a query to display a ‘*’ against the row of the most recently hired employee.
-12.Write a correlated sub-query to list out the employees who earn more than the average salary of their department.
-13.Find the nth maximum salary.
-14.Select the duplicate records (Records, which are inserted, that already exist) in the EMP table.
-15.Write a query to list the length of service of the employees (of the form n years and m months)
+SELECT * FROM EMP
+WHERE SAL > (SELECT MAX(SAL) FROM EMP WHERE JOB = 'Manager');
+
+-- 7.List the highest salary paid for each job.
+SELECT JOB, MAX(SAL) FROM EMP GROUP BY JOB ;
+
+-- 8.Find the most recently hired employee in each department.
+SELECT * FROM EMP WHERE (DEPTNO, HIREDATE) IN (SELECT DEPTNO, MAX(HIREDATE) FROM EMP GROUP BY DEPTNO);
+
+-- 9.In which year did most people join the company? Display the year and the number of employees.
+SELECT TO_CHAR(HIREDATE,'YYYY'), COUNT(EMPNO) FROM EMP
+GROUP BY TO_CHAR(HIREDATE,'YYYY')
+HAVING COUNT(EMPNO) = (SELECT MAX(COUNT(EMPNO)) FROM EMP
+GROUP BY TO_CHAR(HIREDATE,'YYYY'));
+
+-- 10.Which department has the highest annual remuneration bill?
+SELECT DEPTNO, SUM(SAL) FROM EMP GROUP BY DEPTNO
+HAVING SUM(SAL) = (SELECT MAX(SUM(SAL)) FROM EMP GROUP BY DEPTNO);
+
+-- 11.Write a query to display a ‘*’ against the row of the most recently hired employee.
+SELECT LPAD(' ', 2, '*') "RECENTLY HIRED", ENAME, HIREDATE FROM EMP WHERE HIREDATE = (SELECT MAX(HIREDATE) FROM EMP)
+UNION
+SELECT LPAD(' ', LENGTH(ENAME)) "RECENTLY HIRED", ENAME, HIREDATE FROM EMP WHERE HIREDATE != (SELECT MAX(HIREDATE) FROM EMP);
+
+-- 12.Write a correlated sub-query to list out the employees who earn more than the average salary of their department.
+-- SELECT DEPTNO, AVG(SAL) FROM EMP GROUP BY DEPTNO;
+SELECT * FROM EMP E WHERE E.SAL > (SELECT AVG(F.SAL) FROM EMP F WHERE E.DEPTNO = F.DEPTNO);
+
+-- 13.Find the nth maximum salary.
+
+
+-- 14.Select the duplicate records (Records, which are inserted, that already exist) in the EMP table.
+SELECT * FROM EMP A WHERE A.EMPNO
+IN (SELECT EMPNO FROM EMP GROUP BY EMPNO HAVING COUNT(EMPNO) > 1);
+
+-- 15.Write a query to list the length of service of the employees (of the form n years and m months)
+SELECT ENAME "EMPLOYEE", TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE,HIREDATE)/12))
+||' YEARS '||
+TO_CHAR(TRUNC(MOD(MONTHS_BETWEEN (SYSDATE, HIREDATE),12)))
+||' MONTHS ' "LENGTH OF SERVICE"
+FROM EMP;
