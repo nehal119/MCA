@@ -103,7 +103,7 @@ SELECT LPAD(' ', LENGTH(ENAME)) "RECENTLY HIRED", ENAME, HIREDATE FROM EMP WHERE
 SELECT * FROM EMP E WHERE E.SAL > (SELECT AVG(F.SAL) FROM EMP F WHERE E.DEPTNO = F.DEPTNO);
 
 -- 13.Find the nth maximum salary.
-
+SELECT SAL FROM (SELECT SAL, row_number() OVER (ORDER BY SAL DESC) AS nth FROM EMP) WHERE nth = 7;
 
 -- 14.Select the duplicate records (Records, which are inserted, that already exist) in the EMP table.
 SELECT * FROM EMP A WHERE A.EMPNO

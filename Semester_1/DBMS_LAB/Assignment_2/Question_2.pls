@@ -98,7 +98,7 @@ SELECT MIN(CCOST) "Lowest course fee" FROM STUDIES;
 SELECT COUNT(COURSE) "Programmers that have done the BCA course" FROM STUDIES WHERE COURSE = 'BCA';
 
 -- 8.How much revenue has been earned through the sale of packages developed in C.
-SELECT SUM(SOLD) 'Revenue from C packages' FROM SOFTWARE WHERE DEVIN = 'C';
+SELECT SUM(SOLD*SCOST - DCOST) "Revenue from C packages" FROM SOFTWARE WHERE DEVIN = 'C';
 
 -- 9.Display the details of software developed by Rakesh.
 SELECT * FROM SOFTWARE WHERE PNAME = 'Rakesh';
@@ -155,6 +155,7 @@ SELECT
 FROM PROGRAMMER ORDER BY DOJ DESC;
 
 -- 25.Who are the programmers who celebrate their birthdays during the current month?
+SELECT * FROM PROGRAMMER WHERE to_char(DOB, 'Month') = to_char(SYSDATE, 'Month');
 
 -- 26.How many female programmers are there?
 SELECT COUNT(PNAME) FROM PROGRAMMER WHERE SEX = 'F'; 

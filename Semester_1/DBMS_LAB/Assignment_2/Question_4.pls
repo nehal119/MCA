@@ -73,7 +73,7 @@ SELECT SNUM, MAX(AMOUNT), ODATE FROM Orders GROUP BY SNUM, ODATE;
 SELECT SNUM, MAX(AMOUNT), ODATE FROM Orders WHERE ODATE = '03oct1997' GROUP BY SNUM, ODATE;
 
 -- h.Count the no. of different non NULL cities in the Customer table.
-SELECT COUNT(CITY) FROM Customers WHERE CITY != NULL;
+SELECT COUNT(CITY) FROM Customers WHERE CITY IS NOT NULL;
 
 -- i.Find out each customer's smallest order.
 SELECT CNUM, MIN(AMOUNT) FROM Orders GROUP BY CNUM;
