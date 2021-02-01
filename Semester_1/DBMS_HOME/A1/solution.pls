@@ -9,7 +9,7 @@ BEGIN
    LOOP 
    FETCH c_emp into c_deptno, c_id, c_sal; 
       EXIT WHEN c_emp%notfound;
-      UPDATE EMP SET SAL = c_sal + (c_sal*0.05) WHERE DEPTNO = c_deptno;
+      UPDATE EMP SET SAL = c_sal + (c_sal*0.05) WHERE DEPTNO = c_deptno AND DEPTNO = 20;
       INSERT INTO emp_raise(emp_no, date_of_raise, actual_raise) VALUES(c_id, SYSDATE, c_sal*0.05)
    END LOOP; 
    CLOSE c_emp; 

@@ -53,13 +53,33 @@ SELECT * FROM Orders;
 -- a.Find out the largest orders of salesman 1002 and 1007.
 SELECT SNUM, MAX(AMOUNT) FROM Orders WHERE SNUM IN (1002, 1007) GROUP BY SNUM;
 
-b.Count all orders of October 3, 1997.
-c.Calculate the total amount ordered.
-d.Calculate the average amount ordered.
-e.Count the no. of salesmen currently having orders.
-f.Find the largest order taken by each salesman on each date.
-g.Find the largest order taken by each salesman on 10/03/1997.
-h.Count the no. of different non NULL cities in the Customer table.
-i.Find out each customer's smallest order.
-j.Find out the first customer in alphabetical order whose name  begins with 'G'.
-k.Count the no. of salesmen registering orders for each day
+-- b.Count all orders of October 3, 1997.
+SELECT COUNT(ONUM) FROM Orders WHERE ODATE = '03oct1997';
+
+-- c.Calculate the total amount ordered.
+SELECT SUM(AMOUNT) FROM Orders;
+
+-- d.Calculate the average amount ordered.
+SELECT AVG(AMOUNT) FROM Orders;
+
+-- e.Count the no. of salesmen currently having orders.
+-- SELECT COUNT(SNUM) FROM Orders GROUP BY SNUM;
+SELECT COUNT(S.SNUM) FROM Salesmen S, Orders O WHERE O.ODATE=SYSDATE AND S.SNUM=O.SNUM;
+
+-- f.Find the largest order taken by each salesman on each date.
+SELECT SNUM, MAX(AMOUNT), ODATE FROM Orders GROUP BY SNUM, ODATE;
+
+-- g.Find the largest order taken by each salesman on 10/03/1997.
+SELECT SNUM, MAX(AMOUNT), ODATE FROM Orders WHERE ODATE = '03oct1997' GROUP BY SNUM, ODATE;
+
+-- h.Count the no. of different non NULL cities in the Customer table.
+SELECT COUNT(CITY) FROM Customers WHERE CITY != NULL;
+
+-- i.Find out each customer's smallest order.
+SELECT CNUM, MIN(AMOUNT) FROM Orders GROUP BY CNUM;
+
+-- j.Find out the first customer in alphabetical order whose name  begins with 'G'.
+SELECT CNUM, CNAME FROM Customers WHERE CNAME LIKE 'G%' ORDER BY CNAME;
+
+-- k.Count the no. of salesmen registering orders for each day
+SELECT ODATE, COUNT(SNUM) FROM Orders GROUP BY ODATE; 
