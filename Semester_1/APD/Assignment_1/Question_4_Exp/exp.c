@@ -8,6 +8,8 @@ int fac(int x) {
 	return fac;
 }
 
+// sin(x) = (x^1/1!) − (x^3/3!) + (x^5/5!) − (x^7/7!) + · · ·
+
 void looperFunc () {
  	float x, angle, sum = 0;
 	int i, j, limit;

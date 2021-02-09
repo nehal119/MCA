@@ -7,9 +7,11 @@ void looperFunc () {
   printf("Enter second number: ");
   scanf("%d", &secondNum);
   printf("Swapping variables...\n");
+
   firstNum = firstNum + secondNum;
   secondNum = firstNum - secondNum;
   firstNum = firstNum - secondNum;
+
   printf("First number is: %d \n", firstNum);
   printf("Second number is: %d \n", secondNum);
 }
