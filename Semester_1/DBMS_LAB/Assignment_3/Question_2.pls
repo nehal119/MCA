@@ -44,6 +44,10 @@ SELECT * FROM Customers;
 DROP VIEW view2;
 
 -- h)Create a view called view3 on Customers table with name and age. Add check option on age to be not null.
-
+CREATE VIEW view3 AS SELECT ID, NAME, AGE FROM Customers WHERE AGE IS NOT NULL WITH CHECK OPTION;
 
 -- i)Insert a record in view3 (‘Rohan’, NULL) and (‘Joe’, 42). Display the results of view3 and Customers table
+INSERT INTO view3 VALUES(008, 'Rohan', NULL);
+INSERT INTO view3 VALUES(009, 'Joe', 42);
+SELECT * FROM view3;
+SELECT * FROM Customers;
