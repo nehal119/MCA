@@ -1,11 +1,24 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
+
+float absolute(float num) {
+  if(num < 0){
+    num = -num;
+  }
+  return num;
+}
 
 void looperFunc () {
-  int number;
+  float number;
+  float r;
   printf("Enter your number: ");
-  scanf("%d", &number);
-  printf("Square Root of the given number is: %f", sqrt(number));
+  scanf("%f", &number);
+  printf("Entered number is: %f", number);
+  r = number;
+  while (absolute((r * r) - number) >= 0.00001) {
+    r = (number / r + r) / 2.0;
+  }
+  printf("Square Root of the given number is: %g", r);
 }
 
 int main() {
