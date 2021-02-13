@@ -8,12 +8,14 @@ float absolute(float num) {
   return num;
 }
 
+// x_i = (number / x_i + x_i) / 2
+
 void looperFunc () {
   float number;
   float r;
   printf("Enter your number: ");
   scanf("%f", &number);
-  printf("Entered number is: %f", number);
+  printf("Entered number is: %f\n", number);
   r = number;
   while (absolute((r * r) - number) >= 0.00001) {
     r = (number / r + r) / 2.0;

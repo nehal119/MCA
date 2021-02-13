@@ -6,10 +6,10 @@ void conversion(int num, int base) {
     if(num == 0) return;
     conversion(num / base, base);
     if(remainder < 10) {
-          printf("%d", remainder);
+      printf("%d", remainder);
     }
     else {
-          printf("%c", remainder - 10 + 'A' );
+      printf("%c", remainder - 10 + 'A' );
     }
 }
 
