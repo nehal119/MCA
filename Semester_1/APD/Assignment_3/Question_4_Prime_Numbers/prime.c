@@ -9,7 +9,7 @@ void prime(int n) {
     }
   }
   if (flag == 0)
-    printf("%d, ", n);
+    printf("%d ", n);
 }
 
 void looperFunc () {

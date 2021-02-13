@@ -10,7 +10,7 @@ void looperFunc () {
   scanf("%d", &b);
   scanf("%d", &n);
   for (int i = 0; i<n; i++) {
-    printf("%d ,", x0);
+    printf("%d ", x0);
     x0 = (((x0 * a) + b) % m);
   }
 }
