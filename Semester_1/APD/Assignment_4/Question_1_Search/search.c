@@ -28,7 +28,7 @@ void looperFunc () {
   if (c == n) {
     printf("\n\n%d isn't present in the array.\n", search);
   }
-  t = clock() - t; 
+  t = clock() - t;
   double time_taken = ((double)t)/CLOCKS_PER_SEC;
   printf("\nLinear Search took %f seconds to complete \n", time_taken);
 
@@ -41,19 +41,21 @@ void looperFunc () {
   middle = (first+last)/2;
 
   while (first <= last) {
-    if (array[middle] < search)
+    if (array[middle] < search) {
       first = middle + 1;
+    }
     else if (array[middle] == search) {
       printf("\n\n%d found at location %d.\n", search, middle+1);
       break;
     }
-    else
+    else {
       last = middle - 1;
+    }
 
     middle = (first + last)/2;
   }
   if (first > last)
-    printf("\n\n%d isn't present in the array\n", search);
+  printf("\n\n%d isn't present in the array\n", search);
   t = clock() - t; 
   time_taken = ((double)t)/CLOCKS_PER_SEC;
   printf("\nBinary Search took %f seconds to complete \n", time_taken);
