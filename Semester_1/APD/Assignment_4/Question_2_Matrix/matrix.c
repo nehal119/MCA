@@ -40,8 +40,6 @@ void multiplyMatrices(int first[][100], int second[][100], int result[][100], in
 
 // function to display the matrix
 void display(int result[][100], int row, int column) {
-
-   printf("\nOutput Matrix:\n");
    for (int i = 0; i < row; ++i) {
       for (int j = 0; j < column; ++j) {
          printf("%d  ", result[i][j]);
@@ -72,9 +70,11 @@ void looperFunc () {
           scanf("%d", &second[i][j]);
       }
 
+  printf("\nSum is:\n");
   sumMatrices(first, second, sum, r, c);
   display(sum, r, c);
-  
+
+  printf("\nMultiplication is:\n");
   multiplyMatrices(first, second, result, r, c);
   display(result, r, c);
 }

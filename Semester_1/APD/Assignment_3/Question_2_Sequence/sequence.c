@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+// xn+1= (a * xn+ b) mod m for n >= 0
+// 3,3,7,7,7 ==> 3 1 2 0 1 2 0
+
 void looperFunc () {
   int x0;
   int m, a, b, n;
