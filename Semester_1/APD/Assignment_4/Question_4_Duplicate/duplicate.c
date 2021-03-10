@@ -1,13 +1,14 @@
 #include <stdio.h>
 
+// ARRAY SHOULD BE SORTED
+
 int removeDuplicate(int arr[], int n) {
   if (n==0 || n==1)
     return n;
 
   int temp[n];
 
-  int j = 0;
-  int i;
+  int j = 0, i;
   for (i=0; i<n-1; i++)
     if (arr[i] != arr[i+1])
       temp[j++] = arr[i];

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // function to sum two matrices
-void sumMatrices(int first[][100], int second[][100], int sum[][100], int r, int c) {
+void sumMatrices(int first[10][10], int second[10][10], int sum[10][10], int r, int c) {
 
    // Initializing elements of matrix mult to 0.
    for (int i = 0; i < r; ++i) {
@@ -19,7 +19,7 @@ void sumMatrices(int first[][100], int second[][100], int sum[][100], int r, int
 }
 
 // function to multiply two matrices
-void multiplyMatrices(int first[][100], int second[][100], int result[][100], int r, int c) {
+void multiplyMatrices(int first[10][10], int second[10][10], int result[10][10], int r, int c) {
 
    // Initializing elements of matrix mult to 0.
    for (int i = 0; i < r; ++i) {
@@ -39,7 +39,7 @@ void multiplyMatrices(int first[][100], int second[][100], int result[][100], in
 }
 
 // function to display the matrix
-void display(int result[][100], int row, int column) {
+void display(int result[10][10], int row, int column) {
    for (int i = 0; i < row; ++i) {
       for (int j = 0; j < column; ++j) {
          printf("%d  ", result[i][j]);
@@ -50,10 +50,10 @@ void display(int result[][100], int row, int column) {
 }
 
 void looperFunc () {
-  int r, c, first[100][100], second[100][100], sum[100][100], result[100][100];
-  printf("Enter the number of rows (between 1 and 100): ");
+  int r, c, first[10][10], second[10][10], sum[10][10], result[10][10];
+  printf("Enter the number of rows (between 1 and 10): ");
   scanf("%d", &r);
-  printf("Enter the number of columns (between 1 and 100): ");
+  printf("Enter the number of columns (between 1 and 10): ");
   scanf("%d", &c);
 
   printf("\nEnter elements of 1st matrix:\n");
