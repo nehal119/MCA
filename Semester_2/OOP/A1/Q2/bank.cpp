@@ -13,7 +13,7 @@ class Largest {
       type_of_account = type;
       balance = bal;
     }
-    void deposite(double amount) {
+    void deposit(double amount) {
       balance = balance + amount;
     }
     void withdraw(double amount) {
@@ -39,8 +39,8 @@ int main() {
   // Assign initials
   largest.assignInitials(name, type_of_account, account_number, balance);
 
-  // Deposite an amount
-  largest.deposite(5000);
+  // Deposit an amount
+  largest.deposit(5000);
 
   // Withdraw an amount
   largest.withdraw(1000);
