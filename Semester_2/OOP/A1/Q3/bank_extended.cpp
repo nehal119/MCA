@@ -1,16 +1,18 @@
 #include <iostream>
 using namespace std;
 
-class Largest {
+class Bank {
   private:
     string type_of_account, name, password;
     double account_number, balance;
-    // bool assigned = false;
   
   public:
     bool assigned = false;
     string username;
     void takeInputs() {
+      string noUse;
+      cout << "" << endl;
+      getline( cin, noUse );
       cout << "Enter Name: " << endl;
       getline( cin, name );
       cout << "Enter Username: " << endl;
@@ -25,12 +27,7 @@ class Largest {
       cin >> balance;
       assigned = true;
     }
-    int veryfyUser() {
-      string tusername, tpassword;
-      cout << "Enter Name" << endl;
-      getline( cin, tusername );
-      cout << "Enter Username" << endl;
-      getline( cin, tpassword );
+    int veryfyUser(string tusername, string tpassword) {
       if (tusername == username && tpassword == password) {
         return 1;
       } else {
@@ -61,48 +58,62 @@ class Largest {
     }
 };
 
-void signupUser(Largest largest[], int i) {
-  largest[i].takeInputs();
+Bank signupUser(Bank bank[], int i) {
+  bank[i].takeInputs();
+  return bank[i];
 }
 
-int loginUser(Largest largest[], int i) {
-  int count = 0, response;
-  while (count < 3 && response == 0 ) {
-    cout << "Username or password is incorrect, try again!!!" << endl;
-    response = largest[i].veryfyUser();
+Bank loginUser(Bank bank[], int index) {
+  int response;
+  string tusername, tpassword;
+  Bank signedInUser;
+  string noUse;
+  cout << "" << endl;
+  getline( cin, noUse );
+  cout << "Enter Username" << endl;
+  getline( cin, tusername );
+  cout << "Enter Password" << endl;
+  getline( cin, tpassword );
+  for (int i = 0; i < index; ++i) {
+    response = bank[i].veryfyUser(tusername, tpassword);
     if (response == 1) {
+      signedInUser = bank[i];
       break;
     }
-    count += 1;
   }
-  return response;
+  return signedInUser;
 }
 
-int checkIndex(Largest largest[]) {
+int checkIndex(Bank bank[]) {
   int index = 0;
   for( int i=0; i < 10; i++ ) {
-		if (!largest[i].checkElem()) {
+		if (!bank[i].checkElem()) {
       index = i;
       break;
     }
 	}
   return index;
 }
-void userThere(Largest largest, int response) {
-    double amount;
+
+Bank userThere(Bank bank, int response) {
+  double amount;
   switch (response){
   case 1:
-    cout << "Please enter amount" << endl;
+    cout << "Please enter amount to withdraw" << endl;
     cin >> amount;
-    largest.withdraw(amount);
+    bank.withdraw(amount);
+    cout << "Account Updated" << endl;
+    bank.display();
     break;
   case 2:
-    cout << "Please enter amount" << endl;
+    cout << "Please enter amount to deposit" << endl;
     cin >> amount;
-    largest.deposite(amount);
+    bank.deposite(amount);
+    cout << "Account Updated" << endl;
+    bank.display();
     break;
   case 3:
-    largest.display();
+    bank.display();
     break;
   case 4:
     break;
@@ -110,35 +121,45 @@ void userThere(Largest largest, int response) {
     cout << "Not a valid input, please retry";
     break;
   }
+  return bank;
 }
-void loginSuccess(Largest largest) {
-  int response = 0;
-  cout << endl << endl;
-  cout << "********* Welcome " << largest.username << " *********" << endl << endl;;
+
+int showUserOptions(string username) {
+  int response;
+  cout << endl << "********* Welcome " << username << " *********" << endl << endl;;
   cout << "Press 1 to Withdraw money" << endl;
   cout << "Press 2 to Deposit money" << endl;
   cout << "Press 3 to Display Balance" << endl;
   cout << "Press 4 to visit main menu" << endl;
   cin >> response;
   cout << endl;
-  while(response != 4) {
-    userThere(largest, response);
-  }
-  return;
+  return response;
 }
 
-void verifyUserAndServe(Largest largest[], int userInput) {
-  int login = 0;
-  Largest signedInUser;
+Bank loginSuccess(Bank bank) {
+  int response = 0;
+  cout << endl << endl;
+  response = showUserOptions(bank.username);
+  while(response != 4) {
+    bank = userThere(bank, response);
+    response = showUserOptions(bank.username);
+  }
+  return bank;
+}
 
-  int index = checkIndex(largest);
+void verifyUserAndServe(Bank bank[], int userInput) {
+  int login = 0;
+  Bank signedInUser;
+
+  int index = checkIndex(bank);
   switch (userInput) {
     case 1:
-      signupUser(largest, index);
-      login = 1;
+      signedInUser = signupUser(bank, index);
+      // login = 1;
       break;
     case 2:
-      login = loginUser(largest, index);
+      signedInUser = loginUser(bank, index);
+      cout << "Login: " << login << "Index: " << index << endl;
       break;
     case 3:
       break;
@@ -147,27 +168,36 @@ void verifyUserAndServe(Largest largest[], int userInput) {
       break;
   }
 
-  if (login == 0) {
-    cout << "You have exceeded maximum attempts, please try after some time" << endl;;
-  } else {
-    cout << "Login Successfull" << endl << endl;
-    signedInUser = largest[index];
-    loginSuccess(signedInUser);
-  }
+  // if (login == 0) {
+  //   cout << endl << "Username or password is incorrect, try again" << endl << endl;
+  // } else {
+    if (signedInUser.assigned) {
+      cout << "Login Successfull" << endl << endl;
+      // signedInUser = bank[index];
+      bank[index] = loginSuccess(signedInUser);
+    }
+  // }
   return;
 
 }
 
-int main() {
-  Largest largest[10];
-  int userInput = 0;
-  cout << "********* Welcome to New Wells Bank *********" << endl << endl;;
+int showHomeOptions() {
+  int userInput;
+  cout << "********* Welcome to Your Bank *********" << endl << endl;;
   cout << "Press 1 to signup" << endl;
   cout << "Press 2 to login" << endl;
   cout << "Press 3 to exit" << endl;
   cin >> userInput;
+  return userInput;
+}
+
+int main() {
+  Bank bank[10];
+  int userInput = 0;
   cout << endl << endl;
+  userInput = showHomeOptions();
   while(userInput != 3) {
-    verifyUserAndServe(largest, userInput);
+    verifyUserAndServe(bank, userInput);
+    userInput = showHomeOptions();
   }
 }
