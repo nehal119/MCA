@@ -1,10 +1,25 @@
 #include <iostream>
+#include <unistd.h>
 using namespace std;
+
+string gen_random(const int len) {
+    string tmp_s;
+    static const char alphanum[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+    srand( (unsigned) time(NULL) * getpid());
+    tmp_s.reserve(len);
+    for (int i = 0; i < len; ++i) 
+        tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
+    return tmp_s; 
+}
 
 class Bank {
   private:
     string type_of_account, name, password;
-    double account_number, balance;
+    double balance;
+    string account_number = gen_random(10);
   
   public:
     bool assigned = false;
@@ -21,8 +36,8 @@ class Bank {
       getline( cin, password );
       cout << "Enter Type Of Account: " << endl;
       getline( cin, type_of_account );
-      cout << "Enter Account Number: " << endl;
-      cin >> account_number;
+      // cout << "Enter Account Number: " << endl;
+      // cin >> gen_random(5);
       cout << "Enter Balance: " << endl;
       cin >> balance;
       assigned = true;
@@ -42,7 +57,7 @@ class Bank {
     }
     void withdraw(double amount) {
       if (amount > balance) {
-        cout << "Not enough amount to withdraw";
+        cout << "Not enough amount to withdraw" << endl;
       } else {
         balance = balance - amount;
       }

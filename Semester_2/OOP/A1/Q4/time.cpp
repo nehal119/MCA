@@ -13,11 +13,18 @@ class Time {
       ltm = localtime(&now);
     }
     void gettime() {
+      int hours, minutes;
       cout <<"******************************" << endl << endl;
       cout << "Enter Hours: " << endl;
-      cin >> ltm -> tm_hour;
+      cin >> hours;
       cout << "Enter Minutes: " << endl;
-      cin >> ltm -> tm_min;
+      cin >> minutes;
+      if (minutes > 60) {
+        ++hours;
+        minutes = minutes - 60;
+      }
+      ltm -> tm_hour = hours;
+      ltm -> tm_min = minutes;
       cout <<"******************************" << endl << endl;
     }
     void display() {
