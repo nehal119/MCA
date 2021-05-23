@@ -15,8 +15,6 @@ class EvenOdd {
     }
 
     string operator ! () {
-      // cout << "HI THERE";
-      // !number;
       if (number % 2 == 0) {
         return "Even";
       } else {
