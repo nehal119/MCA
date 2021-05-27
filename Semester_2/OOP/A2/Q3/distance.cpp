@@ -55,6 +55,10 @@ class Distance {
       Distance temp;
       temp.feet = feet + obj.feet;
       temp.inches = inches + obj.inches;
+      while (temp.inches >= 12) {
+        temp.feet += 1;
+        temp.inches -= 12;
+      }
       return temp;
     }
 };

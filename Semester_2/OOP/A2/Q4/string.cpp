@@ -37,7 +37,7 @@ class String {
       char tmp[100];
       strcpy(tmp, str);
       strcat(tmp, obj.str);
-      cout << "The resultant string after + overloading is: " << tmp << endl << endl;
+      cout << "The resultant after concatenation is: " << tmp << endl << endl;
     }
   
     void operator == (String& obj) {
@@ -49,7 +49,7 @@ class String {
       if (compare != 0) {
           cout << str1 << " is not equal to "<< str2 << endl;
       } else if(compare == 0){
-          cout << "Strings are equal";
+          cout << "Strings are equal" << endl;
       }
     }
 
