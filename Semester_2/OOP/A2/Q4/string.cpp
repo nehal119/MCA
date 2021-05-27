@@ -59,7 +59,7 @@ class String {
       str2 = convertToString(obj.str, obj.len);
 
       int compare = str1.compare(str2);
-      if (compare > 0) {
+      if (compare < 0) {
           cout << str1 << " is less than "<< str2 << endl;
       } else {
           cout << str1 << " is not less than "<< str2 << endl;
@@ -72,7 +72,7 @@ class String {
       str2 = convertToString(obj.str, obj.len);
 
       int compare = str1.compare(str2);
-      if (compare < 0){
+      if (compare > 0){
         cout << str1 << " is greater than "<< str2 << endl;
       }
       else {

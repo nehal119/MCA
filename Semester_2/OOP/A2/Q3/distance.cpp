@@ -41,7 +41,7 @@ class Distance {
     void operator < (const Distance& obj) {
       if (obj.feet > feet) {
         cout << "Second distance is larger" << endl;
-      } else if (obj.feet > feet) {
+      } else if (obj.feet < feet) {
         cout << "First distance is larger" << endl;
       } else {
         if (obj.inches > inches) {
