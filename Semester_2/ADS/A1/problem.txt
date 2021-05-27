@@ -1,0 +1,14 @@
+1.Write a C/C++ function that accepts
+mathematical expression in infix form as a string and return its tokens as
+array of strings. Input: “(12 – 5)   / 7”
+output: “(“, “12”, “-“, “5”, “)”, “/”, “7”
+
+
+2.Write a C/C++ that accept string
+integer and convert it into equivalent decimal integer without using atoi() in-built
+function.
+
+
+3.Write a C/C++ that accept string floating
+point number and convert it into equivalent float type constant without using
+atof() in-built function.
