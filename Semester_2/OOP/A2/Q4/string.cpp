@@ -11,6 +11,23 @@ string convertToString(char* a, int size) {
   return s;
 }
 
+int compareASCII(char* str1, int size1, char* str2, int size2) {
+  int size = size1, flag = 0;
+  if (size2 < size1) {
+    size = size2;
+  }
+  for (int i = 0; i < size; i++) {
+    if ((int)str1[i] > (int)str2[i]) {
+      flag = 1;
+      break;
+    } else if ((int)str1[i] < (int)str2[i]) {
+      flag = 2;
+      break;
+    }
+  }
+  return flag;
+}
+
 class String {
   private:
     int len;
@@ -41,42 +58,30 @@ class String {
     }
   
     void operator == (String& obj) {
-      string str1, str2;
-      str1 = convertToString(str, len);
-      str2 = convertToString(obj.str, obj.len);
-
-      int compare = str1.compare(str2);
-      if (compare != 0) {
-          cout << str1 << " is not equal to "<< str2 << endl;
-      } else if(compare == 0){
-          cout << "Strings are equal" << endl;
+      int response = compareASCII(str, len, obj.str, obj.len);
+      if (response == 0) {
+        // cout << obj.str << " is equals to "<< str << endl;
+        cout << str << " equals to "<< obj.str << " true" << endl;
+      } else {
+        cout << str << " equals to "<< obj.str << " false" << endl;
       }
     }
 
     void operator < (String& obj) {
-      string str1, str2;
-      str1 = convertToString(str, len);
-      str2 = convertToString(obj.str, obj.len);
-
-      int compare = str1.compare(str2);
-      if (compare < 0) {
-          cout << str1 << " is less than "<< str2 << endl;
+      int response = compareASCII(str, len, obj.str, obj.len);
+      if (response == 1) {
+        cout << str << " greater than "<< obj.str << " true" << endl;
       } else {
-          cout << str1 << " is not less than "<< str2 << endl;
+        cout << str << " greater than "<< obj.str << " false" << endl;
       }
     }
 
     void operator > (String& obj) {
-      string str1, str2;
-      str1 = convertToString(str, len);
-      str2 = convertToString(obj.str, obj.len);
-
-      int compare = str1.compare(str2);
-      if (compare > 0){
-        cout << str1 << " is greater than "<< str2 << endl;
-      }
-      else {
-        cout << str1 << " is not greater than "<< str2 << endl;
+      int response = compareASCII(str, len, obj.str, obj.len);
+      if (response == 2) {
+        cout << str << " less than "<< obj.str << " true" << endl;
+      } else {
+        cout << str << " less than "<< obj.str << " false" << endl;
       }
     }
 };
