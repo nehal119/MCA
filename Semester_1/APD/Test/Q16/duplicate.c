@@ -9,9 +9,11 @@ int removeDuplicate(int arr[], int n) {
   int temp[n];
 
   int j = 0, i;
+
   for (i=0; i<n-1; i++)
     if (arr[i] != arr[i+1])
       temp[j++] = arr[i];
+
   temp[j++] = arr[n-1];
 
   for (i=0; i<j; i++)
@@ -21,11 +23,11 @@ int removeDuplicate(int arr[], int n) {
 }
 
 void looperFunc () {
-  int n;
+  int n, i;
   printf("Enter the length of array: ");
   scanf("%d",&n);
   int arr[n];
-  int i;
+
   printf("Enter %d items of array: \n", n);
   for(i = 0; i < n; i++) {
     scanf("%d",&arr[i]);
@@ -33,8 +35,9 @@ void looperFunc () {
 
   n = removeDuplicate(arr, n);
 
+  printf("The new Array is: \n");
 
-  for (i=0; i<n; i++)
+  for (i = 0; i < n; i++)
     printf("%d ",arr[i]);
 }
 
@@ -46,3 +49,5 @@ int main() {
     scanf("%d", &toContinue);
   }
 }
+
+// Time Complexity : O(n)
