@@ -8,6 +8,6 @@
   - LAB ADS (Advanced Data Structures)
   - LAB OOP (Object Oriented Programming Using C++)
   - LAB SP (Shell Programming)
+  - LAB DMW (Data Mining And Warehousing)
   - Practical Python
-  - Practical DMW (Data Mining And Warehousing)
   - Practical MS (Modelling And Simulation)
