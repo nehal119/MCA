@@ -8,9 +8,6 @@ class Person {
     float weight, height;
 
   public:
-
-    // Person() : feet(0), inches(0) {}
-
     float getBMI() {
       return weight / (height * height);
     }
@@ -37,30 +34,30 @@ class Person {
 };
 
 istream &operator >> (istream &input, Person &p){
-	cout << endl << "Enter Name:\t";
-	// getline(input, p.name);
+	cout << endl << "Enter person's name: ";
   input >> p.name;
-	cout << "Enter height:\t";
+
+	cout << "Enter person's height (in meter): ";
 	input >> p.height;
 
-	cout << "Enter weight:\t";
+	cout << "Enter person's weight (in kg): ";
 	input >> p.weight;
+
   return input;
 }
 
 ostream& operator << (ostream &output, Person &p) {
   char status[20];
   float bmi = p.getBMI();
-  // strcpy(status, p.getBMICategory());
-	output << endl << "NAME = " << p.name << endl
-			 << "Weight = " << p.weight
-			 << "kg" << endl
-			 << "Height = " << p.height << " cm" << endl
-			 << "BMI = " << bmi << "(" << p.getBMICategory() << ")";
+	output << endl << "(Name: " << p.name << ","
+			 << " weight: " << p.weight << ","
+			 << " height: " << p.height << ","
+			 << " BMI: " << bmi << ","
+       << " BMI category: " << p.getBMICategory() << ")";
   return output;
 }
 
-void heapify(Person arr[], int n, int i) {
+void heap(Person arr[], int n, int i) {
     int largest = i;
     int l = 2 * i + 1;
     int r = 2 * i + 2;
@@ -73,17 +70,17 @@ void heapify(Person arr[], int n, int i) {
     }
     if (largest != i) {
       swap(arr[i], arr[largest]);
-      heapify(arr, n, largest);
+      heap(arr, n, largest);
     }
 }
 
 void heapSort(Person arr[], int n) {
     for (int i = n / 2 - 1; i >= 0; i--){
-      heapify(arr, n, i);
+      heap(arr, n, i);
     }
     for (int i = n - 1; i >= 0; i--) {
       swap(arr[0], arr[i]);
-      heapify(arr, i, 0);
+      heap(arr, i, 0);
     }
 }
 
@@ -100,12 +97,16 @@ void print(Person arr[], int n) {
 }
 int main() {
   int n, i;
-  cout << "Enter number of students: ";
+  cout << "Enter number of persons: ";
   cin >> n;
   Person arr[n];
+
   read(arr, n);
+  cout << endl << "** Before Sort **";
   print(arr, n);
+
   heapSort(arr, n);
+  cout << endl << "** After Sort **";
   print(arr, n);
   return 0;
 }
