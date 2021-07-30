@@ -20,7 +20,7 @@ class Engineering: public Student {
       cin >> department;
     }
     void show_data() {
-      cout << "The Information of Engineering student is ";
+      cout << "\nThe Information of Engineering student is ";
       cout << "\nName : " << name;
       cout << "\nDepartment: " << department;
     }
@@ -50,7 +50,7 @@ class Science: public Student {
       cin >> department;
     }
     void show_data() {
-      cout << "The informaion of Science student is ";
+      cout << "\nThe informaion of Science student is ";
       cout << "\nName: " << name;
       cout << "\nDepartment: " << department;
     }
