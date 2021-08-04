@@ -15,18 +15,16 @@ class Polygon {
 
 // Inherit Rectangle from Polygon class
 class Rectangle: public Polygon {
-  public:
-    void calculate_area() override {
-      cout << "The area of the rectangle is: " << width * height << endl;
-    }
+  public: void calculate_area() override {
+    cout << "The area of the rectangle is: " << width * height << endl;
+  }
 };
 
 // Inherit Triangle from Polygon class
 class Triangle: public Polygon {
-  public:
-    void calculate_area() override {
-      cout << "The area of the triangle is: " << width * height / 2 << endl;
-    }
+  public: void calculate_area() override {
+    cout << "The area of the triangle is: " << width * height / 2 << endl;
+  }
 };
 
 void looperFunc() {
