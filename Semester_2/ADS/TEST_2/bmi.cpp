@@ -46,7 +46,7 @@ istream &operator >> (istream &input, Person &p){
   return input;
 }
 
-ostream& operator << (ostream &output, Person &p) {
+ostream &operator << (ostream &output, Person &p) {
   char status[20];
   float bmi = p.getBMI();
 	output << endl << "(Name: " << p.name << ","
