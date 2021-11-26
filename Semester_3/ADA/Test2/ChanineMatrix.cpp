@@ -21,16 +21,22 @@ int minMul(int d[], int n){
 		P[i] = new int [n-1-i];
 	
 	for(int i=0; i<n; i++)
-		M[0][i] = 0;
+			M[i][0] = 0;
 	
 	for(int diagonal=1; diagonal<n; diagonal++) {
+		cout << "Diagonal is: " << diagonal << endl;
 		for(int i=0; i<n-diagonal; i++){
+			cout << "I is: " << i << endl;
 			int j = diagonal;
-			M[i][j] =  M[i][0] + M[i+1][j-1] + d[i]*d[i+1]*d[i+j+1];
+			cout << "J is: " << j << endl;
+			M[j][i] =  M[0][i] + M[j-1][i+1] + d[i]*d[i+1]*d[i+j+1];
+			cout << "round 1 stored" << "\t" << M[j][i] << "at" << j << i << endl;
 			P[i][j-1]=i+1;
 			for(int k=i+1; k<=i+j-1; k++){
-				if((M[i][k-i]+M[k+1][i+j-k-1]+d[i]*d[k+1]*d[i+j+1]) < M[i][j]){
-					M[i][j] = M[i][k-i]+M[k+1][i+j-k-1]+d[i]*d[k+1]*d[i+j+1];
+				cout << "round 2 +++++++++++++++"  << "\t"  << (M[k-i][i] + M[i+j-k-1][k+1] + d[i]*d[k+1]*d[i+j+1] < M[j][i]) << endl;
+				if((M[k-i][i] + M[i+j-k-1][k+1] + d[i]*d[k+1]*d[i+j+1]) < M[j][i]){
+					M[j][i] = M[k-i][i] + M[i+j-k-1][k+1] + d[i]*d[k+1]*d[i+j+1];
+					cout << "round 4 stored"  << "\t" << M[j][i]  << "at" << j << i << endl;
 					P[i][j-1] = k+1;
 				}
 			}
@@ -38,7 +44,19 @@ int minMul(int d[], int n){
 	}
 	cout << "\nMatrix M is\n";
 	for(int i=0; i<n; i++){
-		for(int j=0; j<n-i; j++)
+		for(int j=0; j<n; j++)
+			cout << M[i][j] << "\t";
+		cout<<"\n";
+	}
+	for(int i=1; i< n - 1; i++){
+		for(int j = n-1; j > 0; j--){
+			cout << j << i << endl;
+			M[j][i] = M[abs(j-i)][i];
+		}
+	}
+	cout << "\nMatrix M is\n";
+	for(int i=0; i<n; i++){
+		for(int j=0; j<=i; j++)
 			cout << M[i][j] << "\t";
 		cout<<"\n";
 	}
@@ -48,22 +66,10 @@ int minMul(int d[], int n){
 			cout << P[i][j] << "\t";
 		cout<<"\n";
 	}
-	order(1, n, P);
+	// order(1, n, P);
 	return 0;	
 }
 
-/*
-Algorithm order(i, j,P[1:n-1][1:n], n){
-2. If(i == j) then { Print (�A� + j);
-3. Else{
-4. k = P[i, j];
-5. Print (�(�);
-6. order(i, k);
-7. order(k+1, j);
-8. Print (�)�);
-9. }
-10. }
-*/
 int main(){
 	int d[] = {5, 2, 3, 4, 6};
 	minMul(d, 4);
