@@ -1,72 +1,77 @@
+/**
+ * Name: Nehal Ahmad
+ * Roll Number: 20MCA44
+ */
+
 #include<iostream>
 using namespace std;
-void order(int i, int j, int **P){
+
+void getNumMulti(int n, int **M){
+	cout << M[n -1][0] << endl;
+}
+
+void getOrder(int i, int j, int **P){
 	if(i == j) cout<<"A"<<j;
 	else{
 		int k = P[i-1][j-i-1];
 		cout<<"(";
-		order(i, k, P);
-		order(k+1, j, P);
+		getOrder(i, k, P);
+		getOrder(k+1, j, P);
 		cout << ")";
 	}
 }
 
 int minMul(int d[], int n){
   int **M = new int*[n];
-	for(int i=0; i<n; i++)
+	for(int i=0; i<n; i++){
 		M[i] = new int[n-i];
-	
+	}
+
 	int **P = new int*[n-1];
-	for(int i=0; i<n-1; i++)
+	for(int i=0; i<n-1; i++){
 		P[i] = new int [n-1-i];
-	
-	for(int i=0; i<n; i++)
+	}
+
+	for(int i=0; i<n; i++){
 			M[i][0] = 0;
-	
+	}
+
 	for(int diagonal=1; diagonal<n; diagonal++) {
-		cout << "Diagonal is: " << diagonal << endl;
+		cout << "Scanning diagonal: " << diagonal << endl;
 		for(int i=0; i<n-diagonal; i++){
-			cout << "I is: " << i << endl;
 			int j = diagonal;
-			cout << "J is: " << j << endl;
 			M[j][i] =  M[0][i] + M[j-1][i+1] + d[i]*d[i+1]*d[i+j+1];
-			cout << "round 1 stored" << "\t" << M[j][i] << "at" << j << i << endl;
+			cout << "Store value " << "\t" << M[j][i] << " at " << j << i << endl;
 			P[i][j-1]=i+1;
 			for(int k=i+1; k<=i+j-1; k++){
-				cout << "round 2 +++++++++++++++"  << "\t"  << (M[k-i][i] + M[i+j-k-1][k+1] + d[i]*d[k+1]*d[i+j+1] < M[j][i]) << endl;
 				if((M[k-i][i] + M[i+j-k-1][k+1] + d[i]*d[k+1]*d[i+j+1]) < M[j][i]){
 					M[j][i] = M[k-i][i] + M[i+j-k-1][k+1] + d[i]*d[k+1]*d[i+j+1];
-					cout << "round 4 stored"  << "\t" << M[j][i]  << "at" << j << i << endl;
+					cout << "Store value "  << "\t" << M[j][i]  << " at " << j << i << endl;
 					P[i][j-1] = k+1;
 				}
 			}
 		}
 	}
-	cout << "\nMatrix M is\n";
-	for(int i=0; i<n; i++){
-		for(int j=0; j<n; j++)
-			cout << M[i][j] << "\t";
-		cout<<"\n";
-	}
+
 	for(int i=1; i< n - 1; i++){
 		for(int j = n-1; j > 0; j--){
-			cout << j << i << endl;
 			M[j][i] = M[abs(j-i)][i];
 		}
 	}
-	cout << "\nMatrix M is\n";
+
+	cout << endl << "Required Matrix is" << endl;;
 	for(int i=0; i<n; i++){
 		for(int j=0; j<=i; j++)
 			cout << M[i][j] << "\t";
 		cout<<"\n";
 	}
-	cout << "\nMatrix P is\n";
-	for(int i=0; i<n-1; i++){
-		for(int j=0; j<n-1-i; j++)
-			cout << P[i][j] << "\t";
-		cout<<"\n";
-	}
-	// order(1, n, P);
+
+	cout << endl << "Required Order is" << endl;;
+	getOrder(1, n, P);
+
+	cout << endl << endl << "Number of multiplications in optimal getOrder is: " << endl;
+	getNumMulti(n, M);
+
 	return 0;	
 }
 
