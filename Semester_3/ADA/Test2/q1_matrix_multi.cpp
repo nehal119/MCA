@@ -21,7 +21,7 @@ void getOrder(int i, int j, int **P){
 	}
 }
 
-int minMul(int d[], int n){
+int multiplier(int d[], int n){
   int **M = new int*[n];
 	for(int i=0; i<n; i++){
 		M[i] = new int[n-i];
@@ -77,6 +77,6 @@ int minMul(int d[], int n){
 
 int main(){
 	int d[] = {5, 2, 3, 4, 6};
-	minMul(d, 4);
+	multiplier(d, 4);
 	return 0;
 }
