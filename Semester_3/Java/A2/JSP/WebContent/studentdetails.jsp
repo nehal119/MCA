@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
-<%@page import="net.javaguides.studentmanagement.dao.*"%>
+<%@page import="net.project.studentmanagement.dao.*"%>
 <!DOCTYPE html>
 <html>
 <head>

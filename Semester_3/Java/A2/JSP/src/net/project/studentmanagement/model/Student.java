@@ -1,4 +1,4 @@
-package net.javaguides.studentmanagement.model;
+package net.project.studentmanagement.model;
 
 import java.io.Serializable;
 

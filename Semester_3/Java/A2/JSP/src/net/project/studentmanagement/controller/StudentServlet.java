@@ -1,4 +1,4 @@
-package net.javaguides.studentmanagement.controller;
+package net.project.studentmanagement.controller;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.javaguides.studentmanagement.dao.StudentDao;
-import net.javaguides.studentmanagement.model.Student;
+import net.project.studentmanagement.dao.StudentDao;
+import net.project.studentmanagement.model.Student;
 
 /**
  * @email Ramesh Fadatare

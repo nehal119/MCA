@@ -1,11 +1,11 @@
-package net.javaguides.studentmanagement.dao;
+package net.project.studentmanagement.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import net.javaguides.studentmanagement.model.Student;
+import net.project.studentmanagement.model.Student;
 
 public class StudentDao {
 
