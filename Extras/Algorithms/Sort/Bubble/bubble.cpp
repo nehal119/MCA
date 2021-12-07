@@ -1,3 +1,6 @@
+// https://www.geeksforgeeks.org/bubble-sort/
+// https://www.geeksforgeeks.org/recursive-bubble-sort/
+
 #include <iostream>
 using namespace std;
 
@@ -14,6 +17,26 @@ void bubbleSort(int arr[], int n) {
   }
 }
 
+void swap(int *x, int *y) {
+  int tmp;
+  tmp = *x;
+  *x = *y;
+  *y = tmp;
+}
+
+void recursiveBubble(int arr[], int n) {
+  if (n==1) {
+    return;
+  }
+  for (int i=0; i<n-1; i++) {
+    if(arr[i] > arr[i+1]) {
+      swap(&arr[i], &arr[i+1]);
+    }
+  }
+  recursiveBubble(arr, n-1);
+}
+
+
 void print(int arr[], int n) {
   cout << endl;
   for (int i=0; i< n; i++) {
@@ -23,17 +46,14 @@ void print(int arr[], int n) {
 }
 
 int main() {
-  int n; cin >> n;
-  int arr[n];
-  for (int i=0; i< n; i++) {
-    cin >> arr[i];
-  }
+  int arr[] = {5, 1, 4, 2, 8};
 
-  print(arr, n);
+  print(arr, 5);
 
-  bubbleSort(arr, n);
+  // bubbleSort(arr, n);
+  recursiveBubble(arr, 5);
 
-  print(arr, n);
+  print(arr, 5);
  
   return 0;
 }
