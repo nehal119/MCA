@@ -72,12 +72,12 @@ int refined_knapsack(Item * items_list) {
   printf("Items in Knapsack: \n\n");
   for (i = 0; i < items_count; i++) {
     if (flag[i] == 1) {
-      printf("ITEM(%c)\t ----------- \tPROFIT($%d)\t ----------- \tWEIGHT(%d) \n",
+      printf("Item = %c with profit = %d and weight = %d \n",
         items_list[i].item_name, items_list[i].item_profit, items_list[i].item_weight);
       weight = weight + items_list[i].item_weight;
     }
   }
-  printf("\nTotal Profit in Knapsack: ""$%d\n", new_adjacency_matrix[items_count][knapsack_capacity]);
+  printf("\nTotal Profit in Knapsack: ""%d\n", new_adjacency_matrix[items_count][knapsack_capacity]);
   printf("Total Weight in Knapsack: ""%d\n", weight);
 
   return 0;
