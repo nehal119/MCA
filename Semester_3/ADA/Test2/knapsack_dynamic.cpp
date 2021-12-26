@@ -48,6 +48,7 @@ void knapsack_Dynamic(int w[], int p[], int n, int W){
 	}
 	cout<<"\b\b}\nMax. Profit = " << P[n][W];
 }
+
 int main(){
 	int w[] = {5, 4, 6, 3};
 	int p[] = {10, 40, 30, 50};
