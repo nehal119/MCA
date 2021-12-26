@@ -1,18 +1,10 @@
-// Predefined Libraries used in program
 #include<stdio.h>
 #include<math.h>
-#include<time.h>
 #include<stdlib.h>
-#include<limits.h>
-#include<stdbool.h>
-#include<memory.h>
-#include<string.h>
 
-// Constants used in the program
 #define ITEM_COUNT_MIN 4
 #define ITEM_COUNT_MAX 8
 
-// Structure for Item
 typedef struct _Item {
   char item_name;
   int item_profit;
@@ -21,22 +13,12 @@ typedef struct _Item {
 }
 Item;
 
-// Global Declaration
 int items_count = 4;
 int knapsack_capacity = 0;
-int max_profit = 0;
-int best_set[ITEM_COUNT_MAX];
 
-
-/*
- This function is recursively called to calculate just the required elements in Adjacency Matrix
- */
-int calc_matrix_B(int row_index, int column_index, int matrix_B[items_count + 1][knapsack_capacity + 1], Item * items_list) {
-  // Variable Declaration and Initialization
+int calc_matrix(int row_index, int column_index, int matrix_B[items_count + 1][knapsack_capacity + 1], Item * items_list) {
   int profit_temp_1, profit_temp_2;
   Item item_temp;
-
-  // Logic for recursive call to calculate required elements of Adjacency Matrix
   if (column_index >= 0) {
     if (row_index == 1 || matrix_B[row_index][column_index] != -1) {
       item_temp = items_list[row_index - 1];
@@ -51,8 +33,8 @@ int calc_matrix_B(int row_index, int column_index, int matrix_B[items_count + 1]
       return matrix_B[row_index][column_index];
     } else {
       item_temp = items_list[row_index - 1];
-      profit_temp_1 = calc_matrix_B(row_index - 1, column_index - item_temp.item_weight, matrix_B, items_list);
-      profit_temp_2 = calc_matrix_B(row_index - 1, column_index, matrix_B, items_list);
+      profit_temp_1 = calc_matrix(row_index - 1, column_index - item_temp.item_weight, matrix_B, items_list);
+      profit_temp_2 = calc_matrix(row_index - 1, column_index, matrix_B, items_list);
 
       if ((item_temp.item_weight <= column_index) && (profit_temp_1 + item_temp.item_profit > profit_temp_2)) {
         matrix_B[row_index][column_index] = profit_temp_1 + item_temp.item_profit;
@@ -66,13 +48,10 @@ int calc_matrix_B(int row_index, int column_index, int matrix_B[items_count + 1]
   return 0;
 }
 
-// Knapsack function
 int refined_knapsack(Item * items_list) {
-
-  // Variable Declaration and Initialization
   int i, j, temp_p, temp_w, flag[items_count], weight = 0;
 
-  // Adjacency Matrix Initialization [ Size --> (n + 1) * (W + 1) ]
+  // Initialize matrix
   int adjacency_matrix_B[items_count + 1][knapsack_capacity + 1];
   for (i = 0; i < (items_count + 1); i++) {
     for (j = 0; j < (knapsack_capacity + 1); j++) {
@@ -84,10 +63,8 @@ int refined_knapsack(Item * items_list) {
     }
   }
 
-  // Call for function in order to calculate required elements of Adjacency Matrix
-  calc_matrix_B(items_count, knapsack_capacity, adjacency_matrix_B, items_list);
+  calc_matrix(items_count, knapsack_capacity, adjacency_matrix_B, items_list);
 
-  // Logic to find considered Items for constructing Adjacency Matrix
   for (temp_p = items_count, temp_w = knapsack_capacity; temp_w > 0 && temp_p > 0; temp_p--) {
     if (adjacency_matrix_B[temp_p][temp_w] != adjacency_matrix_B[temp_p - 1][temp_w]) {
       flag[temp_p - 1] = 1;
@@ -95,54 +72,35 @@ int refined_knapsack(Item * items_list) {
     }
   }
 
-  printf("\nITEMS in Knapsack  :->\n");
+  printf("\nITEMS in Knapsack: \n\n");
   for (i = 0; i < items_count; i++) {
     if (flag[i] == 1) {
-      printf("\t\t\t    ITEM(%c)\t;\tPROFIT($%d)\t;\tWEIGHT(%d) \n",
+      printf("\t    ITEM(%c)\t ----------- \tPROFIT($%d)\t ----------- \tWEIGHT(%d) \n",
         items_list[i].item_name, items_list[i].item_profit, items_list[i].item_weight);
       weight = weight + items_list[i].item_weight;
     }
   }
-  printf("\nPROFIT in Knapsack :-> "
-    "\t$ %d\n", adjacency_matrix_B[items_count][knapsack_capacity]);
-  printf("WEIGHT in Knapsack :-> "
-    "\t%d\n", weight);
+  printf("\nTotal Profit in Knapsack: ""$%d\n", adjacency_matrix_B[items_count][knapsack_capacity]);
+  printf("Total Weight in Knapsack: ""%d\n", weight);
 
   return 0;
 }
 
 int main() {
-  // Variable Declaration and Initialization
-  int i, j, profit, weight;
+  int i, j;
   float profit_by_weight;
   Item temp_item;
 
-  // Logic to initialize Random Number Generator as per time stamp so that rand() generates different random numbers
-  srand((unsigned int) time(NULL));
-
-  // Random generation for number of available Items
   while (items_count < ITEM_COUNT_MIN || items_count > ITEM_COUNT_MAX) {
     items_count = (ITEM_COUNT_MIN + (rand() % ITEM_COUNT_MAX));
   }
 
-  // Initialization of structures
   Item * items_list = malloc(items_count * sizeof(Item));
 
   int w[] = {5, 4, 6, 3};
   int p[] = {10, 40, 30, 50};
-  int n = 4, W = 10;
 
-  // Random generation for Profits and Weights for each items
   for (i = 0; i < items_count; i++) {
-    // profit = 0;
-    // weight = 0;
-    // while (profit < ITEM_PROFIT_MIN || profit > ITEM_PROFIT_MAX) {
-    //   profit = (ITEM_PROFIT_MIN + (rand() % ITEM_PROFIT_MAX));
-    // }
-    // while (weight < ITEM_WEIGHT_MIN || weight > ITEM_WEIGHT_MAX) {
-    //   weight = (ITEM_WEIGHT_MIN + (rand() % ITEM_WEIGHT_MAX));
-    // }
-
     profit_by_weight = (float) p[i] / w[i];
 
     items_list[i].item_name = (char) i + 65;
@@ -151,7 +109,7 @@ int main() {
     items_list[i].profit_per_unit_weight = profit_by_weight;
   }
 
-  // Sorting list of Items according to Profit per unit Weight (p/w)
+  // Sort Items according to profit per unit weight
   for (i = 0; i < items_count; i++) {
     for (j = i + 1; j < items_count; j++) {
       if (items_list[i].profit_per_unit_weight < items_list[j].profit_per_unit_weight) {
@@ -162,7 +120,6 @@ int main() {
     }
   }
 
-  // Calculate overall Knapsack Capacity
   for (i = 0; i < items_count; i++) {
     knapsack_capacity = knapsack_capacity + items_list[i].item_weight;
   }

@@ -75,6 +75,9 @@
     "scoped_allocator": "cpp",
     "shared_mutex": "cpp",
     "thread": "cpp",
-    "typeindex": "cpp"
+    "typeindex": "cpp",
+    "stdio.h": "c",
+    "stdbool.h": "c",
+    "memory.h": "c"
   }
 }
