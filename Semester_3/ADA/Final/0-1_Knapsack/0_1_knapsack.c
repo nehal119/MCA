@@ -2,9 +2,6 @@
 #include<math.h>
 #include<stdlib.h>
 
-#define ITEM_COUNT_MIN 4
-#define ITEM_COUNT_MAX 8
-
 typedef struct _Item {
   char item_name;
   int item_profit;
@@ -13,7 +10,7 @@ typedef struct _Item {
 }
 Item;
 
-int items_count = 4;
+int items_count = 0;
 int knapsack_capacity = 0;
 
 int calc_matrix(int row_index, int column_index, int matrix_B[items_count + 1][knapsack_capacity + 1], Item * items_list) {
@@ -52,35 +49,35 @@ int refined_knapsack(Item * items_list) {
   int i, j, temp_p, temp_w, flag[items_count], weight = 0;
 
   // Initialize matrix
-  int adjacency_matrix_B[items_count + 1][knapsack_capacity + 1];
+  int new_adjacency_matrix[items_count + 1][knapsack_capacity + 1];
   for (i = 0; i < (items_count + 1); i++) {
     for (j = 0; j < (knapsack_capacity + 1); j++) {
       if (i == 0 || j == 0) {
-        adjacency_matrix_B[i][j] = 0;
+        new_adjacency_matrix[i][j] = 0;
       } else {
-        adjacency_matrix_B[i][j] = -1;
+        new_adjacency_matrix[i][j] = -1;
       }
     }
   }
 
-  calc_matrix(items_count, knapsack_capacity, adjacency_matrix_B, items_list);
+  calc_matrix(items_count, knapsack_capacity, new_adjacency_matrix, items_list);
 
   for (temp_p = items_count, temp_w = knapsack_capacity; temp_w > 0 && temp_p > 0; temp_p--) {
-    if (adjacency_matrix_B[temp_p][temp_w] != adjacency_matrix_B[temp_p - 1][temp_w]) {
+    if (new_adjacency_matrix[temp_p][temp_w] != new_adjacency_matrix[temp_p - 1][temp_w]) {
       flag[temp_p - 1] = 1;
       temp_w = temp_w - items_list[temp_p - 1].item_weight;
     }
   }
 
-  printf("\nITEMS in Knapsack: \n\n");
+  printf("Items in Knapsack: \n\n");
   for (i = 0; i < items_count; i++) {
     if (flag[i] == 1) {
-      printf("\t    ITEM(%c)\t ----------- \tPROFIT($%d)\t ----------- \tWEIGHT(%d) \n",
+      printf("ITEM(%c)\t ----------- \tPROFIT($%d)\t ----------- \tWEIGHT(%d) \n",
         items_list[i].item_name, items_list[i].item_profit, items_list[i].item_weight);
       weight = weight + items_list[i].item_weight;
     }
   }
-  printf("\nTotal Profit in Knapsack: ""$%d\n", adjacency_matrix_B[items_count][knapsack_capacity]);
+  printf("\nTotal Profit in Knapsack: ""$%d\n", new_adjacency_matrix[items_count][knapsack_capacity]);
   printf("Total Weight in Knapsack: ""%d\n", weight);
 
   return 0;
@@ -91,14 +88,11 @@ int main() {
   float profit_by_weight;
   Item temp_item;
 
-  while (items_count < ITEM_COUNT_MIN || items_count > ITEM_COUNT_MAX) {
-    items_count = (ITEM_COUNT_MIN + (rand() % ITEM_COUNT_MAX));
-  }
-
-  Item * items_list = malloc(items_count * sizeof(Item));
-
   int w[] = {5, 4, 6, 3};
   int p[] = {10, 40, 30, 50};
+  items_count = 4;
+
+  Item * items_list = malloc(items_count * sizeof(Item));
 
   for (i = 0; i < items_count; i++) {
     profit_by_weight = (float) p[i] / w[i];
